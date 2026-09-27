@@ -4,6 +4,15 @@ let taskList = document.getElementById("taskList");
 
 let tasks = [];
 
+const savedTasks = localStorage.getItem('tasks');
+if (savedTasks !== null) {
+  tasks = JSON.parse(savedTasks);
+}
+
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 function renderTasks() {
   taskList.innerHTML = '';
 
