@@ -14,6 +14,7 @@ function saveTasks() {
 }
 
 function renderTasks() {
+  saveTasks();
   taskList.innerHTML = '';
 
   tasks.forEach(task => {
