@@ -54,3 +54,18 @@ function renderTasks() {
     taskList.appendChild(li);
   });
 }
+
+const checkbox = document.createElement('input');
+checkbox.type = 'checkbox';
+checkbox.checked = task.completed;
+
+checkbox.addEventListener('click', () => {
+  tasks = tasks.map(t => 
+    t.id === task.id ? { ...t, completed: !t.completed } : t
+  );
+  renderTasks();
+});
+
+li.appendChild(checkbox);
+
+li.style.textDecoration = task.completed ? 'line-through' : 'none';
