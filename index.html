@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <input type="text" id="taskInput" placeholder="Enter a task">
-   <button id="addTaskBtn">Add Task</button>
-   <div id="taskList"></div>
+  <div id="app">
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addTaskBtn">Add Task</button>
 
-   
-<script src="script.js"></script>
+    <div id="filters">
+      <button data-filter="all">All</button>
+      <button data-filter="active">Active</button>
+      <button data-filter="completed">Completed</button>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

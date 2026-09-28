@@ -3,6 +3,8 @@ let addTaskButton = document.getElementById("addTaskBtn");
 let taskList = document.getElementById("taskList");
 
 let tasks = [];
+let currentFilter = 'all';
+const filterButtons = document.querySelectorAll('#filters button');
 
 const savedTasks = localStorage.getItem('tasks');
 if (savedTasks !== null) {
@@ -17,10 +19,20 @@ function renderTasks() {
   saveTasks();
   taskList.innerHTML = '';
 
-  tasks.forEach(task => {
-    const li = document.createElement('li');
-    li.textContent = task.text;
-    li.style.textDecoration = task.completed ? 'line-through' : 'none';
+  filterButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+  });
+
+  const visibleTasks = tasks.filter(task => {
+    if (currentFilter === 'active') return !task.completed;
+    if (currentFilter === 'completed') return task.completed;
+    return true;
+  });
+
+  visibleTasks.forEach(task => {
+    const span = document.createElement('span');
+    span.textContent = task.text;
+    span.style.textDecoration = task.completed ? 'line-through' : 'none';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -42,8 +54,8 @@ function renderTasks() {
     });
 
     li.appendChild(checkbox);
+    li.appendChild(span);
     li.appendChild(deleteBtn);
-    taskList.appendChild(li);
   });
 }
 
@@ -65,3 +77,12 @@ addTaskButton.addEventListener('click', () => {
 
   taskInput.value = '';
 });
+
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    renderTasks();
+  });
+});
+
+renderTasks();
