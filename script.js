@@ -30,11 +30,13 @@ function renderTasks() {
   });
 
   visibleTasks.forEach(task => {
-    const span = document.createElement('span');
-    span.textContent = task.text;
-    span.style.textDecoration = task.completed ? 'line-through' : 'none';
+  const li = document.createElement('li');
 
-    const checkbox = document.createElement('input');
+  const span = document.createElement('span');
+  span.textContent = task.text;
+  span.style.textDecoration = task.completed ? 'line-through' : 'none';
+
+  const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
 
@@ -56,6 +58,7 @@ function renderTasks() {
     li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(deleteBtn);
+    taskList.appendChild(li);
   });
 }
 
